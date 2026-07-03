@@ -1,0 +1,52 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+    Scanner sc=new Scanner(System.in);
+    int n=sc.nextInt();
+    List<Integer> heap=new ArrayList<>();
+    for(int i=0;i<n;i++)
+    {
+      heap.add(sc.nextInt());
+      heapifyup(heap,i);
+    }
+    System.out.print(heap);
+    int ind=sc.nextInt();
+    heap.set(ind,heap.get(heap.size()-1));
+    heap.remove(heap.size()-1);
+     heapifydown(heap,0);
+    System.out.println(heap);
+
+    }
+    public static void heapifyup(List<Integer> heap,int i)
+    {
+       while(i!=0 && heap.get(i)<heap.get((i-1)/2))
+       {
+        Collections.swap(heap,i,(i-1)/2);
+        i=(i-1)/2;
+       }
+    }
+    public static void heapifydown(List<Integer> heap,int i)
+    {
+      int n=heap.size();
+      while(true)
+      {
+        int p=i;
+        int left=2*i+1;
+        int right=2*i+2;
+        if(left<n && heap.get(left)<heap.get(p))
+        {
+          p=left;
+        }
+        if(right<n && heap.get(right)<heap.get(p))
+        {
+          p=right;
+        }
+        if(i==p)    break;
+
+          Collections.swap(heap,i,p);
+          i=p;
+      }
+
+    }
+}
